@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../bloc/login_bloc.dart';
 import '../bloc/provider.dart';
 
-//copia para git ahre
-//copia
 
 class LoginPage extends StatelessWidget {
   @override
