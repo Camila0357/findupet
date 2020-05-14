@@ -170,8 +170,7 @@ class _MascotaPageState extends State<MascotaPage> {
     );
   }
 
-  void _submit() async{
-    
+  void _submit() async{    
 
     if (!formKey.currentState.validate()) return;
     
@@ -204,13 +203,22 @@ class _MascotaPageState extends State<MascotaPage> {
 
   Widget _mostrarFoto(){
     if (mascota.fotoUrl != null){
-      return Container();
-    } else{
-      return Image(
-        image: AssetImage( foto?.path ?? 'assets/no-image.png'),
-        height: 200,
-        fit: BoxFit.cover,
+      //return Container();
+      return FadeInImage(         
+        image: NetworkImage(mascota.fotoUrl),
+        placeholder: AssetImage('assets/jar-loading.gif'),
+        height: 300.0,
+        fit: BoxFit.contain,
       );
+    } else { 
+      if( foto != null ){
+        return Image.file(
+          foto,
+          fit: BoxFit.cover,
+          height: 300.0,
+        );
+      }
+      return Image.asset('assets/no-image.png');
     }
   }
 
@@ -226,9 +234,9 @@ class _MascotaPageState extends State<MascotaPage> {
     foto = await ImagePicker.pickImage(
       source: origen
     );
-
     if (foto != null ) {
       //Limpieza
+      mascota.fotoUrl = null;
 
     }
     setState(() {});
