@@ -200,7 +200,7 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _crearFondo(BuildContext context) {
-    final fondoModaro = Container(
+    final fondo = Container(
       child: Image(
         image: AssetImage('images/login.jpg'),
         fit: BoxFit.fill,
@@ -209,7 +209,7 @@ class LoginPage extends StatelessWidget {
 
     return Stack(
       children: <Widget>[
-        fondoModaro,
+        fondo,
       ],
     );
   }
