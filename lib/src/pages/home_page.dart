@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
 
           return ListView.builder(
             itemCount: mascotas.length,
-            itemBuilder: (context, i) => _crearItem(context, mascotas[i]),
+            itemBuilder: (context, i) => _crearItem(/* context, */ mascotas[i]),
         );
 
         } else {
@@ -43,13 +43,28 @@ class HomePage extends StatelessWidget {
   }
 
 
-  Widget _crearItem(BuildContext context, MascotaModel mascota) {
+  Widget _crearItem(/* BuildContext context, */ MascotaModel mascota) {
 
-    return ListTile(
-      title: Text('${mascota.nombre} - ${mascota.edad} - ${mascota.raza} - ${mascota.ciudad} - ${mascota.descripcion}'),
-      subtitle: Text(mascota.id),
-      onTap: () => Navigator.pushNamed(context, 'mascota'),
-    );
+    return Card(
+          child: Column(
+            children: <Widget>[
+              (mascota.fotoUrl == null) 
+              ? Image(image: AssetImage('assets/no-image.png'))
+              : FadeInImage(
+                placeholder: AssetImage('assets/jar-loading.gif'), 
+                image: NetworkImage(mascota.fotoUrl),
+                height: 300.0,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                ),
+                ListTile(
+                  title: Text('${mascota.nombre} - ${mascota.edad} - ${mascota.raza} - ${mascota.ciudad} - ${mascota.descripcion}'),
+                  subtitle: Text(mascota.id),
+                  /* onTap: () => Navigator.pushNamed(context, 'mascota'), */
+                ),
+            ],
+          ),
+        );
   }
 
 
