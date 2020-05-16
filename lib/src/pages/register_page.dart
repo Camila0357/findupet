@@ -6,12 +6,29 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
+      body: Form(
+        child: Container(
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+                image: new AssetImage("images/fondo.jpg"), fit: BoxFit.cover),
+          ),
+          child: Column(
+            children: <Widget>[
+              _loginForm(context),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    /* return Scaffold(
         body: Stack(
       children: <Widget>[
         _crearFondo(context),
         _loginForm(context),
       ],
-    ));
+    )); */
   }
 
   Widget _loginForm(BuildContext context) {
@@ -23,28 +40,19 @@ class RegisterPage extends StatelessWidget {
         children: <Widget>[
           SafeArea(
             child: Container(
-              height: 40.0,
+              height: 100.0,
             ),
           ),
           Container(
-            width: size.width * 0.85,
-         
-            margin: EdgeInsets.symmetric(vertical: 5.0),
-            padding: EdgeInsets.symmetric(vertical: 5.0),
+            width: size.width * 0.87,
+            height: 580,
             decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(2.0),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 2.0,
-                  offset: Offset(0.0, 3.0),
-                  spreadRadius: 3.0
-                )
-              ]
+              color: Colors.purple[50],
             ),
             child: Column(
               children: <Widget>[
+                SizedBox(height: 40.0),
+                _crearTitulo(bloc),
                 SizedBox(height: 8.0),
                 _crearEmail(bloc),
                 SizedBox(height: 8.0),
@@ -60,7 +68,7 @@ class RegisterPage extends StatelessWidget {
                 SizedBox(height: 8.0),
                 _crearTelefono(bloc),
                 SizedBox(height: 15.0),
-                _crearBoton(bloc),                               
+                _crearBoton(bloc),
               ],
             ),
           ),
@@ -79,13 +87,19 @@ class RegisterPage extends StatelessWidget {
       stream: bloc.emailStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return Container(
+          width: 320,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: TextField(
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-                icon: Icon(Icons.star, color: Colors.deepPurple),
+                prefixIcon: Icon(Icons.email),
+                // icon: Icon(Icons.star, color: Colors.deepPurple),
                 hintText: 'ejemplo@correo.com',
-                labelText: 'REGISTRO',
+                labelText: 'E-mail',
                 /* counterText: snapshot.data, */
                 errorText: snapshot.error),
             onChanged: bloc.changeEmail,
@@ -96,17 +110,23 @@ class RegisterPage extends StatelessWidget {
   }
 
   Widget _crearNombre(LoginBloc bloc) {
-    return StreamBuilder(      
+    return StreamBuilder(
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return Container(
+          width: 320,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: TextField(
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
-                icon: Icon(Icons.star, color: Colors.deepPurple),            
+                prefixIcon: Icon(Icons.supervised_user_circle),
+                //icon: Icon(Icons.star, color: Colors.deepPurple),
                 labelText: 'Nombre Completo',
                 /* counterText: snapshot.data, */
-                errorText: snapshot.error),            
+                errorText: snapshot.error),
           ),
         );
       },
@@ -114,17 +134,23 @@ class RegisterPage extends StatelessWidget {
   }
 
   Widget _crearRaza(LoginBloc bloc) {
-    return StreamBuilder(      
+    return StreamBuilder(
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return Container(
+          width: 320,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: TextField(
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
-                icon: Icon(Icons.star, color: Colors.deepPurple),            
+                prefixIcon: Icon(Icons.star),
+                //icon: Icon(Icons.star, color: Colors.deepPurple),
                 labelText: 'Raza',
                 counterText: snapshot.data,
-                errorText: snapshot.error),            
+                errorText: snapshot.error),
           ),
         );
       },
@@ -132,17 +158,23 @@ class RegisterPage extends StatelessWidget {
   }
 
   Widget _crearRol(LoginBloc bloc) {
-    return StreamBuilder(      
+    return StreamBuilder(
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return Container(
+          width: 320,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: TextField(
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
-                icon: Icon(Icons.star, color: Colors.deepPurple),            
+                prefixIcon: Icon(Icons.star),
+                //icon: Icon(Icons.star, color: Colors.deepPurple),
                 labelText: 'Adoptante o Fundación',
                 counterText: snapshot.data,
-                errorText: snapshot.error),            
+                errorText: snapshot.error),
           ),
         );
       },
@@ -150,17 +182,41 @@ class RegisterPage extends StatelessWidget {
   }
 
   Widget _crearCiudad(LoginBloc bloc) {
-    return StreamBuilder(      
+    return StreamBuilder(
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return Container(
+          width: 320,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: TextField(
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
-                icon: Icon(Icons.star, color: Colors.deepPurple),            
+                prefixIcon: Icon(Icons.star),
+                //icon: Icon(Icons.star, color: Colors.deepPurple),
                 labelText: 'Ciudad',
                 counterText: snapshot.data,
-                errorText: snapshot.error),            
+                errorText: snapshot.error),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _crearTitulo(LoginBloc bloc) {
+    return StreamBuilder(
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          width: 320,
+          height: 50,
+          padding: EdgeInsets.symmetric(horizontal: 15.0),
+          child: Text(
+            "Crear cuenta",
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
         );
       },
@@ -168,17 +224,23 @@ class RegisterPage extends StatelessWidget {
   }
 
   Widget _crearTelefono(LoginBloc bloc) {
-    return StreamBuilder(      
+    return StreamBuilder(
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return Container(
+          width: 320,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: TextField(
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
-                icon: Icon(Icons.star, color: Colors.deepPurple),            
+                prefixIcon: Icon(Icons.star),
+                // icon: Icon(Icons.star, color: Colors.deepPurple),
                 labelText: 'Telefono',
                 counterText: snapshot.data,
-                errorText: snapshot.error),            
+                errorText: snapshot.error),
           ),
         );
       },
@@ -190,11 +252,17 @@ class RegisterPage extends StatelessWidget {
       stream: bloc.passwordStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return Container(
+          width: 320,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: TextField(
             obscureText: true,
             decoration: InputDecoration(
-                icon: Icon(Icons.lock_outline, color: Colors.deepPurple),
+                prefixIcon: Icon(Icons.star),
+                //icon: Icon(Icons.lock_outline, color: Colors.deepPurple),
                 labelText: 'Contraseña',
                 counterText: snapshot.data,
                 errorText: snapshot.error),
@@ -215,11 +283,10 @@ class RegisterPage extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return RaisedButton(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+              padding: EdgeInsets.symmetric(horizontal: 110.0, vertical: 15.0),
               child: Text('Regístrate'),
             ),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
+            shape: RoundedRectangleBorder(),
             elevation: 0.0,
             color: Colors.deepPurple,
             textColor: Colors.white,

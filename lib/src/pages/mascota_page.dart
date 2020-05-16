@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:formvalidation/src/models/mascota_model.dart';
 import 'package:formvalidation/src/providers/mascotas_provider.dart';
@@ -23,11 +23,13 @@ class _MascotaPageState extends State<MascotaPage> {
 
   @override
   Widget build(BuildContext context) {
-        
+       int seleccionado=0; 
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: Text('Mascota'),
+        
+        backgroundColor: Colors.lightBlue[50],
+        
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.photo_size_select_actual),
@@ -41,32 +43,106 @@ class _MascotaPageState extends State<MascotaPage> {
           )
         ],
       ),
+      /* appBar: AppBar(
+        title: Text('Mascota'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.photo_size_select_actual),
+            color: Colors.blue[250],
+            onPressed: _seleccionarFoto,
+          ),
+          IconButton(
+            icon: Icon(Icons.camera_alt), 
+            color: Colors.blue[250],
+            onPressed: _tomarFoto,
+          )
+        ],
+      ), */
 
-      body: SingleChildScrollView(        
+      body: SingleChildScrollView(  
+        
         child: Container(
-          padding: EdgeInsets.all(15.0),
+          alignment: Alignment.center,
+          width: 375,
+            height: 800,
+            decoration: BoxDecoration(
+              color: Colors.purple[50],
+            ),
+            margin: EdgeInsets.only(left: 15,right: 15),
+          
           child: Form(
+            
             key: formKey,
             child: Column(
+              
               children: <Widget>[
                 _mostrarFoto(),
+                 SizedBox(height: 20.0),
+                 _crearTitulo(),
+                   SizedBox(height: 8.0),
                 _crearNombre(),
+                 SizedBox(height: 8.0),
                 _crearEdad(),
+                 SizedBox(height: 8.0),
                 _crearRaza(),
+                 SizedBox(height: 8.0),
                 _crearCiudad(),
+                 SizedBox(height: 8.0),
                 _crearDescripcion(),
+                 SizedBox(height: 8.0),
+                 
                 _crearBoton(),
               ],
             ),
           ),
         ),
+      
       ),
-    );
+    
+     bottomNavigationBar: new Theme(
+       data: Theme.of(context).copyWith(
+      
+        canvasColor: Colors.lightBlue[50],
+        ),
+       child: BottomNavigationBar(
+          backgroundColor: Colors.lightBlue[50],
+          selectedItemColor: Colors.black,
+          selectedIconTheme: IconThemeData(color: Colors.deepPurpleAccent),
+          unselectedItemColor: Colors.white,
+          unselectedIconTheme: IconThemeData(color:Colors.black),
+          currentIndex: seleccionado,
+          onTap: (index){
+            
+            
+            
+            setState(() {
+              seleccionado=index;
+            });
+            
+            
+            print(seleccionado);},
+          
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.category), title: Text("Categorias")),
+            BottomNavigationBarItem(icon: Icon(Icons.search), title: Text("Busqueda")),
+            BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
+            BottomNavigationBarItem(icon: Icon(Icons.check), title: Text("Tips")),
+            BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("Perfil")),
+          ]),
+    ),);
   }
   
   Widget _crearNombre(){
     // Trabaja directamente con un formulario ara ser parte del formulario de arriba
-    return TextFormField(
+    return new Container(
+          width: 320,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+    padding: EdgeInsets.symmetric(horizontal: 15.0),
+    child: TextFormField(
       initialValue: mascota.nombre,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -80,11 +156,18 @@ class _MascotaPageState extends State<MascotaPage> {
           return null;
         }
       },
-    );
+    ));
   }
 
   Widget _crearEdad(){
-    return TextFormField(
+    return  new Container(
+          width: 320,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+   padding: EdgeInsets.symmetric(horizontal: 15.0), 
+    child: TextFormField(
       initialValue: mascota.edad,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -98,11 +181,18 @@ class _MascotaPageState extends State<MascotaPage> {
           return null;
         }
       },
-    );
+    ));
   }
 
   Widget _crearRaza(){
-    return TextFormField(
+    return new Container(
+          width: 320,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+    padding: EdgeInsets.symmetric(horizontal: 15.0),
+    child: TextFormField(
       initialValue: mascota.raza,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -116,11 +206,18 @@ class _MascotaPageState extends State<MascotaPage> {
           return null;
         }
       },
-    );
+    ));
   }
 
   Widget _crearCiudad(){
-    return TextFormField(
+    return new Container(
+          width: 320,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+    padding: EdgeInsets.symmetric(horizontal: 15.0),
+    child: TextFormField(
       initialValue: mascota.ciudad,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -134,14 +231,22 @@ class _MascotaPageState extends State<MascotaPage> {
           return null;
         }
       },
-    );
+    ));
   }
 
   Widget _crearDescripcion(){
-    return TextFormField(
+    return new Container(
+          width: 320,
+          height: 125,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+    padding: EdgeInsets.symmetric(horizontal: 15.0),
+    child: TextFormField(
       initialValue: mascota.descripcion,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
+        
         labelText: 'Descripción',
       ),
       onSaved: (value) => mascota.descripcion = value,
@@ -152,20 +257,36 @@ class _MascotaPageState extends State<MascotaPage> {
           return null;
         }
       },
+    ));
+  }
+Widget _crearTitulo() {
+    return StreamBuilder(
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          width: 320,
+          height: 35,
+          padding: EdgeInsets.symmetric(horizontal: 15.0),
+          child: Text(
+            "Ingrese los datos de la mascota",
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+        );
+      },
     );
   }
-
   
 
   Widget _crearBoton(){
-    return RaisedButton.icon(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0)
-      ),
-      color: Colors.blue,
+    return RaisedButton(
+      child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 115.0, vertical: 15.0),
+              child: Text('Guardar'),
+            ),
+      color: Colors.deepPurpleAccent,
       textColor: Colors.white,
-      label: Text('Guardar'),
-      icon: Icon(Icons.save),
+     
       onPressed: (_guardando) ? null : _submit,
     );
   }
@@ -201,13 +322,15 @@ class _MascotaPageState extends State<MascotaPage> {
 
   }
 
+
   Widget _mostrarFoto(){
+    
     if (mascota.fotoUrl != null){
       //return Container();
       return FadeInImage(         
         image: NetworkImage(mascota.fotoUrl),
         placeholder: AssetImage('assets/jar-loading.gif'),
-        height: 300.0,
+        height: 250.0,
         fit: BoxFit.contain,
       );
     } else { 
@@ -215,7 +338,7 @@ class _MascotaPageState extends State<MascotaPage> {
         return Image.file(
           foto,
           fit: BoxFit.cover,
-          height: 300.0,
+          height: 250.0,
         );
       }
       return Image.asset('assets/no-image.png');
