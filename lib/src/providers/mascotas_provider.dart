@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:formvalidation/src/models/mascota_model.dart';
+import 'package:formvalidation/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:mime_type/mime_type.dart';
@@ -9,9 +10,10 @@ import 'package:mime_type/mime_type.dart';
 class MascotasProvider {
 
   final String _url = 'https://findupet.firebaseio.com';
+  final _prefs = new PreferenciasUsuario();
 
   Future<bool> crearMascota(MascotaModel mascota) async {
-    final url = '$_url/mascotas.json';
+    final url = '$_url/mascotas.json?auth=${_prefs.token}';
 
     final resp = await http.post(url, body: mascotaModelToJson(mascota));
 
@@ -24,7 +26,7 @@ class MascotasProvider {
 
   Future<List<MascotaModel>> cargarMascotas() async {
 
-    final url = '$_url/mascotas.json';
+    final url = '$_url/mascotas.json?auth=${_prefs.token}';
     final resp = await http.get(url);
 
     final Map<String, dynamic> decodedData = json.decode(resp.body);

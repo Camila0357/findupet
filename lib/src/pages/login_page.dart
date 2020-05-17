@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:formvalidation/src/providers/usuario_provider.dart';
+import 'package:formvalidation/src/utils/utils.dart';
 import '../bloc/login_bloc.dart';
 import '../bloc/provider.dart';
 
 
 class LoginPage extends StatelessWidget {
+
+  final usuarioProvider = new UsuarioProvider();
+
   @override
   
   Widget build(BuildContext context){
@@ -46,7 +51,7 @@ class LoginPage extends StatelessWidget {
                 _crearBoton(bloc),
                 new FlatButton(
                   child: new Text('Registrate'),
-                  onPressed: moveToRegister,
+                  onPressed: () => Navigator.pushReplacementNamed(context, 'registro'),
                 )                 
               ],
             ),
@@ -96,7 +101,7 @@ class LoginPage extends StatelessWidget {
                 _crearBoton(bloc),
                 new FlatButton(
                   child: new Text('Registrate'),
-                  onPressed: moveToRegister,
+                  onPressed: () => Navigator.pushReplacementNamed(context, 'registro'),
                 )                 
               ],
             ),
@@ -109,7 +114,6 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  void moveToRegister() {}
 
   Widget _crearEmail(LoginBloc bloc) {
 
@@ -190,14 +194,20 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _login(LoginBloc bloc, BuildContext context) {
-    print('================');
-    print('Email: ${bloc.email}');
-    print('Password: ${bloc.password}');
-    print('================');
+  _login(LoginBloc bloc, BuildContext context) async {
+    
+    Map info = await usuarioProvider.login(bloc.email, bloc.password);
 
-    Navigator.pushReplacementNamed(context, 'home');
+    if (info['ok']) {
+      Navigator.pushReplacementNamed(context, 'home');
+    } else {
+      mostrarAlerta(context, info['mensaje'] );
+    }
+
+    //Navigator.pushReplacementNamed(context, 'home');
   }
+
+ 
 
   Widget _crearFondo(BuildContext context) {
     final fondo = Container(
