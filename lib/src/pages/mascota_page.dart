@@ -288,6 +288,7 @@ Widget _crearTitulo() {
       textColor: Colors.white,
      
       onPressed: (_guardando) ? null : _submit,
+      
     );
   }
 
@@ -306,7 +307,6 @@ Widget _crearTitulo() {
     mascotaProvider.crearMascota(mascota);
    
     mostrarSnackbar('Registro exitoso');
-
     Navigator.pop(context);
 
   }
@@ -342,7 +342,7 @@ Widget _crearTitulo() {
         );
       }
       return Image.asset('assets/no-image.png');
-    }
+    } 
   }
 
   _seleccionarFoto() async {

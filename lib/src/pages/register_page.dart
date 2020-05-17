@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:formvalidation/src/providers/usuario_provider.dart';
+import 'package:formvalidation/src/utils/utils.dart';
 import '../bloc/login_bloc.dart';
 import '../bloc/provider.dart';
 
 class RegisterPage extends StatelessWidget {
+
+  final usuarioProvider = new UsuarioProvider();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +63,7 @@ class RegisterPage extends StatelessWidget {
                 SizedBox(height: 8.0),
                 _crearPassword(bloc),
                 SizedBox(height: 8.0),
-                _crearNombre(bloc),
-                SizedBox(height: 8.0),
-                _crearRaza(bloc),
+                _crearNombre(bloc),                
                 SizedBox(height: 8.0),
                 _crearRol(bloc),
                 SizedBox(height: 8.0),
@@ -73,14 +76,15 @@ class RegisterPage extends StatelessWidget {
             ),
           ),
 
-          /* Text('¿Olvidó la contraseña?'),          
-          SizedBox( height: 1000.0 ) */
+          new FlatButton(
+                  child: new Text('¿Ya tienes cuenta? Login'),
+                  onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
+                ) 
         ],
       ),
     );
   }
 
-  void moveToRegister() {}
 
   Widget _crearEmail(LoginBloc bloc) {
     return StreamBuilder(
@@ -126,30 +130,6 @@ class RegisterPage extends StatelessWidget {
                 //icon: Icon(Icons.star, color: Colors.deepPurple),
                 labelText: 'Nombre Completo',
                 /* counterText: snapshot.data, */
-                errorText: snapshot.error),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _crearRaza(LoginBloc bloc) {
-    return StreamBuilder(
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return Container(
-          width: 320,
-          height: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 15.0),
-          child: TextField(
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-                prefixIcon: Icon(Icons.star),
-                //icon: Icon(Icons.star, color: Colors.deepPurple),
-                labelText: 'Raza',
-                counterText: snapshot.data,
                 errorText: snapshot.error),
           ),
         );
@@ -290,18 +270,19 @@ class RegisterPage extends StatelessWidget {
             elevation: 0.0,
             color: Colors.deepPurple,
             textColor: Colors.white,
-            onPressed: snapshot.hasData ? () => _login(bloc, context) : null);
+            onPressed: snapshot.hasData ? () => _register(bloc, context) : null);
       },
     );
   }
 
-  _login(LoginBloc bloc, BuildContext context) {
-    print('================');
-    print('Email: ${bloc.email}');
-    print('Password: ${bloc.password}');
-    print('================');
+  _register(LoginBloc bloc, BuildContext context) async {
+    final info = await usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
+    if (info['ok']) {
+      Navigator.pushReplacementNamed(context, 'home');
+    } else {
+      mostrarAlerta(context, info['mensaje'] );
+    }
 
-    Navigator.pushReplacementNamed(context, 'home');
   }
 
   Widget _crearFondo(BuildContext context) {
