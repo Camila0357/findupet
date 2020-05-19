@@ -70,7 +70,7 @@ class RegisterPage extends StatelessWidget {
                 _crearCiudad(bloc),
                 SizedBox(height: 8.0),
                 _crearTelefono(bloc),
-                SizedBox(height: 15.0),
+                SizedBox(height: 50.0),
                 _crearBoton(bloc),
               ],
             ),
@@ -268,7 +268,7 @@ class RegisterPage extends StatelessWidget {
             ),
             shape: RoundedRectangleBorder(),
             elevation: 0.0,
-            color: Colors.deepPurple,
+            color: Colors.deepPurpleAccent,
             textColor: Colors.white,
             onPressed: snapshot.hasData ? () => _register(bloc, context) : null);
       },

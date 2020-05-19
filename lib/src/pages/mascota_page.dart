@@ -130,7 +130,8 @@ class _MascotaPageState extends State<MascotaPage> {
             BottomNavigationBarItem(icon: Icon(Icons.check), title: Text("Tips")),
             BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("Perfil")),
           ]),
-    ),);
+    ),
+    );
   }
   
   Widget _crearNombre(){
