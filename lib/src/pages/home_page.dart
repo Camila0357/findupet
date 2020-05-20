@@ -61,8 +61,8 @@ class HomePage extends StatelessWidget {
 
   Widget _botonCompartir(String text) {
     return FlatButton(
-      child: Icon(Icons.share),
-      color: Colors.black,
+      child: Icon(Icons.share, color:Colors.grey,),
+      
       onPressed: () async {
         final ByteData bytes = await rootBundle.load('assets/no-image.png');
         await WcFlutterShare.share(
@@ -77,15 +77,15 @@ class HomePage extends StatelessWidget {
 
   Widget _botonChat(BuildContext context) {
     return FlatButton(
-        child: Icon(Icons.message),
-        color: Colors.black,
+        child: Icon(Icons.message,color:Colors.grey),
+        
         onPressed: () => Navigator.pushNamed(context, 'chat'));
   }
 
   Widget _labelBoton(String text, BuildContext context) {
     return Column(children: <Widget>[
       Container(
-        padding: EdgeInsets.all(2.0),
+        
         child: Row(children: <Widget>[
           _botonCompartir(text),
           _botonChat(context),

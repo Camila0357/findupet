@@ -36,12 +36,12 @@ class _MascotaPageState extends State<MascotaPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.photo_size_select_actual),
-            color: Colors.blue[250],
+            color: Colors.blue,
             onPressed: _seleccionarFoto,
           ),
           IconButton(
             icon: Icon(Icons.camera_alt),
-            color: Colors.blue[250],
+            color: Colors.blue,
             onPressed: _tomarFoto,
           )
         ],
