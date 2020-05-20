@@ -15,7 +15,13 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        
         backgroundColor: Colors.lightBlue[50],
+        
+        leading: Padding(padding: const EdgeInsets.all(8.0),
+          child:_logo("images/logo.png"),),
+        centerTitle: true,
+        title: Image.asset('images/nombre.png', ),
       ),
       body: _crearListado(),
       floatingActionButton: _crearBoton(context),
@@ -103,17 +109,29 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _circleImage() {
+  Widget _circleImage(String logo) {
     return Container(
       width: 45.0,
       height: 45.0,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.red,
-        /* image: DecorationImage(
+        
+         image: DecorationImage(
           fit:BoxFit.fill,
-          image: AssetImage("images/fundacion.png")
-        ) */
+          image: AssetImage(logo)
+        ) 
+      ),
+    );
+  }
+  Widget _logo(String logo) {
+    return Container(
+      width: 45.0,
+      height: 45.0,
+      decoration: BoxDecoration(
+         image: DecorationImage(
+          fit:BoxFit.fill,
+          image: AssetImage(logo)
+        ) 
       ),
     );
   }
@@ -125,7 +143,7 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.all(10.0),
             child: Row(
               children: <Widget>[
-                _circleImage(),
+                _circleImage("images/fundacion.png"),
                 Container(
                   padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
                   child: Text(
