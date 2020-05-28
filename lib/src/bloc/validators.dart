@@ -4,7 +4,7 @@ import 'dart:async';
 
 class Validators {
 
-
+  //se valida el patron que ddebe seguir el email 
   final validarEmail = StreamTransformer<String, String>.fromHandlers(
     handleData: ( email, sink ) {
 
@@ -25,7 +25,7 @@ class Validators {
   final validarPassword = StreamTransformer<String, String>.fromHandlers(
     //Informacion que necesita modificar si hay un error (sink)
     handleData: ( password, sink ) {
-
+      //condicional qeu la contraseña debe tener mas de 2 caracteres
       if ( password.length >= 2 ) {
         sink.add( password );
       } else {

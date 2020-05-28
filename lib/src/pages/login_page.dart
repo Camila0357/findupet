@@ -30,8 +30,6 @@ class LoginPage extends StatelessWidget {
             children:<Widget>[
               new Container(
                 padding: EdgeInsets.only(top: 58.0),
-                
-                //backgroundColor(Color(0xF81F7F3))
                 child: new Image(
                   width: 410,
                   height: 410, 
@@ -39,8 +37,7 @@ class LoginPage extends StatelessWidget {
                 ),
 
               ),
-             Container(
-                    
+             Container(                    
             child: Column(
               children: <Widget>[
                 SizedBox(height: 10.0),
@@ -64,16 +61,8 @@ class LoginPage extends StatelessWidget {
 
     );
   }
-  /* Widget build(BuildContext context) {
-    return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        _crearFondo(context),
-        _loginForm(context),
-      ],
-    ));
-  } */
 
+/* 
   Widget _loginForm(BuildContext context) {
     // Llama el loginbloc hasta encontrar una instancia del provider y de ahi se saca el loginBloc, trabajndo con esa instancia
     final bloc = Provider.of(context);
@@ -113,7 +102,7 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-
+ */
 
   Widget _crearEmail(LoginBloc bloc) {
 

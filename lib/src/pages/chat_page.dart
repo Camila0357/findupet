@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:formvalidation/src/pages/chat_screen.dart';
 
+import 'app_bar.dart';
+import 'botton_bar.dart';
+
+
 class ChatPage extends StatelessWidget {
   State createState() => new ChatScreenState();
   @override
   Widget build(BuildContext context) {
-    int seleccionado=0; 
+     int _seleccionado = 2;
     return new Scaffold(
-        appBar: AppBar(
-        
-        backgroundColor: Colors.lightBlue[50],leading: Padding(padding: const EdgeInsets.all(8.0),
-          child:_logo("images/logo.png"),),
-        centerTitle: true,
-        title: Image.asset('images/nombre.png', ),
-      ),
-
+        appBar: AppBarWidget(),
        
-        body: new ChatScreen(),
+        body: new ChatScreen(),        
         
-        
-         bottomNavigationBar: new Theme(
+         bottomNavigationBar: BottomBarWidget(
+          actual: _seleccionado,
+        controlClick: (index){          
+        },
+        ),
+         
+         /* new Theme(
        data: Theme.of(context).copyWith(
       
         canvasColor: Colors.lightBlue[50],
@@ -51,7 +53,7 @@ class ChatPage extends StatelessWidget {
             BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("Perfil")),
           ]),
     ),
-        
+         */
         );
 
         

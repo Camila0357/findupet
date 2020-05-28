@@ -5,58 +5,37 @@ import 'package:formvalidation/src/providers/mascotas_provider.dart';
 import '../bloc/provider.dart';
 import 'package:wc_flutter_share/wc_flutter_share.dart';
 
-class HomePage extends StatelessWidget {
+import 'app_bar.dart';
+import 'botton_bar.dart';
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final mascotasProvider = new MascotasProvider();
+
+  int _seleccionado = 2;
 
   @override
   Widget build(BuildContext context) {
-    int seleccionado = 0;
+  
     final bloc = Provider.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        
-        backgroundColor: Colors.lightBlue[50],
-        
-        leading: Padding(padding: const EdgeInsets.all(8.0),
-          child:_logo("images/logo.png"),),
-        centerTitle: true,
-        title: Image.asset('images/nombre.png', ),
-      ),
+      appBar: AppBarWidget(),
       body: _crearListado(),
       floatingActionButton: _crearBoton(context),
-      bottomNavigationBar: new Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: Colors.lightBlue[50],
+      bottomNavigationBar: BottomBarWidget(
+        actual: _seleccionado,
+        controlClick: (index){
+          setState(() {
+            _seleccionado = index;
+          });
+        },
         ),
-        child: BottomNavigationBar(
-            backgroundColor: Colors.lightBlue[50],
-            selectedItemColor: Colors.black,
-            selectedIconTheme: IconThemeData(color: Colors.deepPurpleAccent),
-            unselectedItemColor: Colors.white,
-            unselectedIconTheme: IconThemeData(color: Colors.black),
-            currentIndex: seleccionado,
-            onTap: (index) {
-              /* setState(() {
-              seleccionado=index;
-            }); */
-
-              print(seleccionado);
-            },
-            items: [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.category), title: Text("Categorias")),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.search), title: Text("Busqueda")),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home), title: Text("Home")),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.check), title: Text("Tips")),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.people), title: Text("Perfil")),
-            ]),
-      ),
-    );
+      );
   }
 
   Widget _botonCompartir(String text) {
@@ -77,15 +56,13 @@ class HomePage extends StatelessWidget {
 
   Widget _botonChat(BuildContext context) {
     return FlatButton(
-        child: Icon(Icons.message,color:Colors.grey),
-        
+        child: Icon(Icons.message,color:Colors.grey),        
         onPressed: () => Navigator.pushNamed(context, 'chat'));
   }
 
   Widget _labelBoton(String text, BuildContext context) {
     return Column(children: <Widget>[
       Container(
-        
         child: Row(children: <Widget>[
           _botonCompartir(text),
           _botonChat(context),
@@ -116,18 +93,6 @@ class HomePage extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         
-         image: DecorationImage(
-          fit:BoxFit.fill,
-          image: AssetImage(logo)
-        ) 
-      ),
-    );
-  }
-  Widget _logo(String logo) {
-    return Container(
-      width: 45.0,
-      height: 45.0,
-      decoration: BoxDecoration(
          image: DecorationImage(
           fit:BoxFit.fill,
           image: AssetImage(logo)
@@ -195,11 +160,6 @@ class HomePage extends StatelessWidget {
           _labelBoton('${mascota.nombre} - ${mascota.descripcion}', context),
           _texto('${mascota.nombre} - ${mascota.descripcion}'),
 
-          /* title: Text('${mascota.nombre} - ${mascota.edad} - ${mascota.raza} - ${mascota.ciudad} - ${mascota.descripcion}',
-                  style: TextStyle(),),
-                  subtitle: Text(mascota.id), */
-          /* onTap: () => Navigator.pushNamed(context, 'mascota'), */
-          /* ), */
         ],
       ),
     );

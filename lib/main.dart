@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:formvalidation/src/pages/log_out.dart';
 import 'package:formvalidation/src/pages/mascota_page.dart';
 import 'package:formvalidation/src/pages/register_page.dart';
 import 'package:formvalidation/src/pages/chat_page.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
           'home'  : ( BuildContext context ) => HomePage(),
           'registro': (BuildContext context ) => RegisterPage(),
           'mascota' : (BuildContext context) => MascotaPage(),
-           'chat' : (BuildContext context) => ChatPage()
+          'chat' : (BuildContext context) => ChatPage(),
+          'logout' : (BuildContext context) => LogOutPage()
         },
         theme: ThemeData(
           primaryColor: Colors.indigo[800],
